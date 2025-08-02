@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoiceClone 2030 | Beverly 2030</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6e00ff;
+            --secondary: #00f7ff;
+            --accent: #ff00aa;
+            --dark: #0a0a14;
+            --darker: #05050c;
+            --light: #e0e0e0;
+            --card-bg: rgba(15, 15, 35, 0.7);
+            --glass: rgba(20, 20, 40, 0.8);
+            --success: #00ff9d;
+            --danger: #ff5555;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--darker);
+            color: var(--light);
+            font-family: 'Exo 2', sans-serif;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(110, 0, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(0, 247, 255, 0.1) 0%, transparent 40%),
+                linear-gradient(to bottom, var(--darker), var(--dark));
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+        
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(110, 0, 255, 0.3);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--secondary);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Case Study Hero */
+        .case-hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 10%;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(110, 0, 255, 0.2), rgba(0, 247, 255, 0.1));
+        }
+        
+        .case-hero-content {
+            max-width: 900px;
+            z-index: 1;
+        }
+        
+        .case-hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(to right, var(--light), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 247, 255, 0.3);
+        }
+        
+        .tagline {
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 1.8rem;
+            margin-bottom: 3rem;
+            letter-spacing: 1px;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .case-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+        
+        /* Case Study Sections */
+        .case-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 5%;
+        }
+        
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .section-content {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(110, 0, 255, 0.3);
+            backdrop-filter: blur(10px);
+            margin-bottom: 4rem;
+        }
+        
+        /* Challenge/Solution Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+        
+        .card {
+            background: rgba(10, 15, 30, 0.6);
+            border-radius: 15px;
+            padding: 2.5rem;
+            border: 1px solid rgba(110, 0, 255, 0.2);
+            transition: all 0.4s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(110, 0, 255, 0.2);
+        }
+        
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+        
+        .card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        /* Demo Section */
+        .demo-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .demo-content {
+            padding-right: 2rem;
+        }
+        
+        .demo-interface {
+            background: rgba(10, 15, 30, 0.6);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(110, 0, 255, 0.3);
+            text-align: center;
+        }
+        
+        .voice-visualizer {
+            height: 200px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .visualizer-bars {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 100%;
+            padding: 0 20px;
+        }
+        
+        .bar {
+            width: 10px;
+            background: linear-gradient(to top, var(--primary), var(--accent));
+            border-radius: 5px 5px 0 0;
+            transition: height 0.2s ease;
+        }
+        
+        .demo-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .demo-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(110, 0, 255, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(0, 247, 255, 0.1);
+        }
+        
+        /* Tech Stack */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .tech-item {
+            background: rgba(0, 247, 255, 0.1);
+            color: var(--secondary);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        /* Testimonials */
+        .testimonials-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .testimonial-card {
+            background: rgba(10, 15, 30, 0.6);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(110, 0, 255, 0.3);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            font-size: 5rem;
+            color: rgba(110, 0, 255, 0.2);
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .author-info p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* Call to Action */
+        .cta-section {
+            text-align: center;
+            padding: 5rem 10%;
+            background: linear-gradient(135deg, rgba(110, 0, 255, 0.1), rgba(0, 0, 0, 0.2));
+            border-top: 1px solid rgba(110, 0, 255, 0.3);
+            margin-top: 3rem;
+        }
+        
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(5, 5, 15, 0.8);
+            padding: 4rem 5% 2rem;
+            border-top: 1px solid rgba(110, 0, 255, 0.3);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-about p {
+            line-height: 1.7;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+        
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .footer-links a {
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+        
+        .footer-links i {
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(0, 247, 255, 0.1);
+            color: var(--secondary);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--secondary);
+            color: var(--dark);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .case-hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .demo-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .case-hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .tagline {
+                font-size: 1.4rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .case-hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+            
+            .stat-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="#" class="logo">
+            <span class="logo-icon">B</span>
+            Beverly 2030
+        </a>
+        <nav>
+            <ul>
+                <li><a href="bev2030.html"><i class="fas fa-arrow-left"></i> Back to Portfolio</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="case-hero">
+        <div class="case-hero-content">
+            <h1>VoiceClone 2030</h1>
+            <p class="tagline">AI-Powered Voice Synthesis & Cloning</p>
+            
+            <div class="case-stats">
+                <div class="stat-item">
+                    <div class="stat-value">30s</div>
+                    <div class="stat-label">Sample Required</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">98%</div>
+                    <div class="stat-label">Accuracy</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">12ms</div>
+                    <div class="stat-label">Latency</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">47</div>
+                    <div class="stat-label">Languages</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Project Overview -->
+    <section class="case-section">
+        <h2 class="section-title">Project Overview</h2>
+        <div class="section-content">
+            <p>VoiceClone 2030 is a revolutionary voice synthesis system that creates perfect vocal replicas from just 30 seconds of sample audio. Unlike traditional voice cloning systems, VoiceClone captures subtle emotional nuances, speech patterns, and unique vocal characteristics to produce indistinguishable synthetic speech.</p>
+            
+            <p>Developed for content creators, voice actors, and individuals with speech disabilities, VoiceClone 2030 preserves emotional inflection while allowing complete control over synthesized speech output.</p>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <i class="fas fa-brain card-icon"></i>
+                    <h3>Innovation</h3>
+                    <p>First system to capture emotional subtones in synthesized speech using patented neural architecture</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-bolt card-icon"></i>
+                    <h3>Efficiency</h3>
+                    <p>Real-time processing with just 12ms latency enables live voice transformation applications</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-globe card-icon"></i>
+                    <h3>Accessibility</h3>
+                    <p>Supports 47 languages with regional accents, making it globally accessible</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Demo Section -->
+    <section class="case-section">
+        <h2 class="section-title">Interactive Demo</h2>
+        <div class="section-content">
+            <div class="demo-container">
+                <div class="demo-content">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--secondary);">Experience VoiceClone</h3>
+                    <p style="line-height: 1.7; margin-bottom: 1.5rem;">Try our voice cloning demo below. Record a short sample or select a preset voice to hear VoiceClone 2030 in action.</p>
+                    <ul style="padding-left: 20px; margin-bottom: 2rem; line-height: 1.8;">
+                        <li>Record 30 seconds of your voice</li>
+                        <li>Choose an emotion for the output</li>
+                        <li>Type text for the AI to speak</li>
+                        <li>Hear your cloned voice instantly</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <div class="tech-item">
+                            <i class="fab fa-python"></i> Python
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-wave-square"></i> PyTorch
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-microphone-alt"></i> WebAudio API
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="demo-interface">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--secondary);">VoiceClone Interface</h3>
+                    
+                    <div class="voice-visualizer">
+                        <div class="visualizer-bars">
+                            <div class="bar" style="height: 30%;"></div>
+                            <div class="bar" style="height: 70%;"></div>
+                            <div class="bar" style="height: 90%;"></div>
+                            <div class="bar" style="height: 40%;"></div>
+                            <div class="bar" style="height: 60%;"></div>
+                            <div class="bar" style="height: 80%;"></div>
+                            <div class="bar" style="height: 50%;"></div>
+                            <div class="bar" style="height: 30%;"></div>
+                            <div class="bar" style="height: 70%;"></div>
+                            <div class="bar" style="height: 90%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin: 1.5rem 0;">
+                        <select class="demo-btn" style="width: 100%; padding: 0.8rem; background: rgba(10, 15, 30, 0.6); color: var(--light); border: 1px solid rgba(110, 0, 255, 0.3); border-radius: 8px;">
+                            <option>Select Emotion</option>
+                            <option>Happy</option>
+                            <option>Sad</option>
+                            <option>Excited</option>
+                            <option>Calm</option>
+                            <option>Angry</option>
+                        </select>
+                    </div>
+                    
+                    <textarea placeholder="Type text for the AI to speak..." style="width: 100%; height: 100px; padding: 1rem; background: rgba(10, 15, 30, 0.6); color: var(--light); border: 1px solid rgba(110, 0, 255, 0.3); border-radius: 8px; margin-bottom: 1.5rem;"></textarea>
+                    
+                    <div class="demo-controls">
+                        <button class="demo-btn btn-primary">
+                            <i class="fas fa-microphone"></i> Record
+                        </button>
+                        <button class="demo-btn btn-secondary">
+                            <i class="fas fa-play"></i> Generate
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Challenges & Solutions -->
+    <section class="case-section">
+        <h2 class="section-title">Technical Challenges & Solutions</h2>
+        <div class="section-content">
+            <div class="card-grid">
+                <div class="card">
+                    <i class="fas fa-exclamation-triangle card-icon"></i>
+                    <h3>Challenge: Emotional Inflection</h3>
+                    <p>Traditional voice clones sound robotic and emotionless. Capturing subtle emotional cues required breakthrough approaches.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-lightbulb card-icon"></i>
+                    <h3>Solution: Neural Emotion Encoding</h3>
+                    <p>Developed a novel neural architecture that separates linguistic content from emotional subtones during training.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-exclamation-triangle card-icon"></i>
+                    <h3>Challenge: Sample Size</h3>
+                    <p>Most systems require hours of sample audio to create convincing clones, limiting accessibility.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-lightbulb card-icon"></i>
+                    <h3>Solution: Transfer Learning</h3>
+                    <p>Leveraged pre-trained models on thousands of voices, requiring minimal fine-tuning for new samples.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Results -->
+    <section class="case-section">
+        <h2 class="section-title">Impact & Results</h2>
+        <div class="section-content">
+            <div class="card-grid">
+                <div class="card">
+                    <i class="fas fa-chart-line card-icon"></i>
+                    <h3>Commercial Adoption</h3>
+                    <p>Licensed by 3 major film studios for digital voice preservation of aging actors.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-universal-access card-icon"></i>
+                    <h3>Accessibility Impact</h3>
+                    <p>Helped 12,000+ speech-impaired individuals regain their natural voice.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-award card-icon"></i>
+                    <h3>Industry Recognition</h3>
+                    <p>Winner of 2024 AI Breakthrough Award for Most Innovative Voice Technology.</p>
+                </div>
+            </div>
+            
+            <div style="background: rgba(10, 15, 30, 0.6); border-radius: 15px; padding: 2rem; margin-top: 3rem; border: 1px solid rgba(110, 0, 255, 0.3);">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--secondary);">Performance Metrics</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; text-align: center;">
+                    <div>
+                        <div style="font-size: 2.5rem; font-weight: 700; background: linear-gradient(90deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">92%</div>
+                        <div>User Satisfaction</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; font-weight: 700; background: linear-gradient(90deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">0.3s</div>
+                        <div>Avg. Processing Time</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; font-weight: 700; background: linear-gradient(90deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">12M+</div>
+                        <div>Voice Minutes Generated</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section class="case-section">
+        <h2 class="section-title">Client Testimonials</h2>
+        <div class="section-content">
+            <div class="testimonials-container">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        As a voice actor who lost my voice to illness, VoiceClone gave me back my career. The emotional range is incredible - it captures my signature sarcasm perfectly.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MJ</div>
+                        <div class="author-info">
+                            <h4>Michael Johnson</h4>
+                            <p>Voice Actor, VocalRestore Initiative</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        We've integrated VoiceClone into our customer service platform. Resolution times improved by 40% as customers respond better to familiar voices.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SC</div>
+                        <div class="author-info">
+                            <h4>Sarah Chen</h4>
+                            <p>CTO, ServiceFirst Solutions</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        The 30-second sample requirement is revolutionary. We've preserved voices of elderly community leaders that would have been lost forever.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">DR</div>
+                        <div class="author-info">
+                            <h4>Dr. Rajiv Singh</h4>
+                            <p>Cultural Preservation Foundation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Transform Voice Experiences</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">Ready to integrate VoiceClone 2030 into your product or service?</p>
+            <div class="cta-buttons">
+                <button class="demo-btn btn-primary" style="padding: 1rem 2.5rem; font-size: 1.1rem;">
+                    <i class="fas fa-calendar-alt"></i> Schedule Demo
+                </button>
+                <button class="demo-btn btn-secondary" style="padding: 1rem 2.5rem; font-size: 1.1rem;">
+                    <i class="fas fa-file-alt"></i> Technical Documentation
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">Beverly 2030</div>
+                <p>Building the future with innovative AI solutions that transform industries and empower people.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-medium"></i></a>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="footer-title">Projects</h4>
+                <div class="footer-links">
+                    <a href="voice.html"><i class="fas fa-chevron-right"></i> VoiceClone 2030</a>
+                    <a href="nl.html"><i class="fas fa-chevron-right"></i> NeuroLink Analytics</a>
+                    <a href="#"><i class="fas fa-chevron-right"></i> AutoCodeX</a>
+                    <a href="#"><i class="fas fa-chevron-right"></i> Quantum-Compute API</a>
+                </div>
+            </div>
+            
+            <div>
+                <h4 class="footer-title">Contact</h4>
+                <div class="footer-links">
+                    <a href="#"><i class="fas fa-envelope"></i> beverlyorganisation8@gmail.com</a>
+                    <a href="#"><i class="fas fa-map-marker-alt"></i> Kampala, Uganda</a>
+                    <a href="#"><i class="fas fa-phone"></i> +256 742559366</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 Beverly 2030. VoiceClone 2030 is a proprietary voice synthesis technology. All rights reserved.
+        </div>

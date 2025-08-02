@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beverly 2030: Futurist Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6e00ff;
+            --secondary: #00f7ff;
+            --dark: #0a0a14;
+            --light: #e0e0e0;
+            --accent: #ff00aa;
+            --glass: rgba(20, 20, 40, 0.8);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(110, 0, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(0, 247, 255, 0.15) 0%, transparent 50%);
+        }
+        
+        /* Glitch Text Effect */
+        .glitch {
+            position: relative;
+            font-weight: 800;
+        }
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+        .glitch::before {
+            color: var(--accent);
+            z-index: -1;
+            animation: glitch-effect 3s infinite;
+        }
+        .glitch::after {
+            color: var(--secondary);
+            z-index: -2;
+            animation: glitch-effect 2s reverse infinite;
+        }
+        
+        @keyframes glitch-effect {
+            0% { transform: translate(0); }
+            20% { transform: translate(-3px, 3px); }
+            40% { transform: translate(-3px, -3px); }
+            60% { transform: translate(3px, 3px); }
+            80% { transform: translate(3px, -3px); }
+            100% { transform: translate(0); }
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(110, 0, 255, 0.3);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            animation: pulse 2s infinite;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(110, 0, 255, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(0, 247, 255, 0.1);
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(110, 0, 255, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(110, 0, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(110, 0, 255, 0); }
+        }
+        
+        /* Particle Background */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+        
+        /* Sections */
+        section {
+            padding: 6rem 10%;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* AI Demos Section */
+        .demos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .demo-card {
+            background: var(--glass);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(110, 0, 255, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .demo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(110, 0, 255, 0.2);
+        }
+        
+        .demo-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(110, 0, 255, 0.3);
+        }
+        
+        .demo-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .demo-header .tech-stack {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .tech-item {
+            background: rgba(0, 247, 255, 0.1);
+            color: var(--secondary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+        }
+        
+        .demo-content {
+            padding: 1.5rem;
+        }
+        
+        .demo-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .demo-btn {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background: rgba(110, 0, 255, 0.2);
+            color: var(--secondary);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .demo-btn:hover {
+            background: rgba(110, 0, 255, 0.4);
+        }
+        
+        /* Case Studies Section */
+        .case-study {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            align-items: center;
+        }
+        
+        .case-study:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .case-study-content {
+            flex: 1;
+        }
+        
+        .case-study h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .case-study-stats {
+            display: flex;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .case-study-visual {
+            flex: 1;
+            height: 300px;
+            background: var(--glass);
+            border-radius: 15px;
+            border: 1px solid rgba(110, 0, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Testimonials */
+        .testimonials-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background: var(--glass);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(110, 0, 255, 0.3);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            font-size: 5rem;
+            color: rgba(110, 0, 255, 0.2);
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .author-info p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        /* 2030 Section */
+        .future-roadmap {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .roadmap-item {
+            background: var(--glass);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(110, 0, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .roadmap-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+        
+        .roadmap-year {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .roadmap-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--glass);
+            padding: 3rem 10%;
+            text-align: center;
+            border-top: 1px solid rgba(110, 0, 255, 0.3);
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .social-links a {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .case-study {
+                flex-direction: column;
+            }
+            
+            .case-study:nth-child(even) {
+                flex-direction: column;
+            }
+            
+            .case-study-visual {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero {
+                padding: 0 5%;
+            }
+            
+            section {
+                padding: 4rem 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Beverly 2030</div>
+        <nav>
+            <ul>
+                <li><a href="#ai-demos">AI Demos</a></li>
+                <li><a href="#case-studies">Case Studies</a></li>
+                <li><a href="#systems">Systems</a></li>
+                <li><a href="#testimonials">Credibility</a></li>
+                <li><a href="#future">2030 Vision</a></li>
+            </ul>
+            <button class="menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div id="particles-js"></div>
+        <div class="hero-content">
+            <h1 class="glitch" data-text="Beverly 2030">Beverly 2030</h1>
+            <p>Building Scalable Systems for the Next Digital Revolution</p>
+            <div class="cta-buttons">
+                <a href="#ai-demos" class="btn btn-primary">Explore My Work</a>
+                <a href="#contact" class="btn btn-secondary">Let's Build 2030</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- AI Demos Section -->
+    <section id="ai-demos">
+        <h2 class="section-title">AI-Powered Software Demos</h2>
+        <div class="demos-container">
+            <!-- Demo 1 -->
+            <div class="demo-card">
+                <div class="demo-header">
+                    <h3>Project NeuroLink</h3>
+                    <div class="tech-stack">
+                        <span class="tech-item">Python</span>
+                        <span class="tech-item">TensorFlow</span>
+                        <span class="tech-item">GPT-5</span>
+                    </div>
+                </div>
+                <div class="demo-content">
+                    <p>AI-driven analytics dashboard that predicts market trends with 92% accuracy using neural networks trained on global economic data.</p>
+                    <a href="nl.html" class="demo-btn">View Live Demo</a>
+                </div>
+            </div>
+            
+            <!-- Demo 2 -->
+            <div class="demo-card">
+                <div class="demo-header">
+                    <h3>VoiceClone 2030</h3>
+                    <div class="tech-stack">
+                        <span class="tech-item">NLP</span>
+                        <span class="tech-item">PyTorch</span>
+                        <span class="tech-item">WebAudio API</span>
+                    </div>
+                </div>
+                <div class="demo-content">
+                    <p>Custom voice synthesis tool that clones vocal patterns with just 30 seconds of sample audio while maintaining emotional inflection.</p>
+                    <a href="voice.html" class="demo-btn">View Case Study</a>
+                </div>
+            </div>
+            
+            <!-- Demo 3 -->
+            <div class="demo-card">
+                <div class="demo-header">
+                    <h3>AutoCodeX</h3>
+                    <div class="tech-stack">
+                        <span class="tech-item">LLMs</span>
+                        <span class="tech-item">Rust</span>
+                        <span class="tech-item">WASM</span>
+                    </div>
+                </div>
+                <div class="demo-content">
+                    <p>Self-improving code generator that reduces development time by 40% while maintaining security best practices through reinforcement learning.</p>
+                    <a href="#" class="demo-btn">View GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Case Studies Section -->
+    <section id="case-studies">
+        <h2 class="section-title">Social Media Growth Engine</h2>
+        
+        <div class="case-study">
+            <div class="case-study-content">
+                <h3>Viral Loop Architecture</h3>
+                <p>Designed a content distribution system that increased Client X's engagement by 300% in 6 months through algorithmic pattern recognition and optimized posting schedules.</p>
+                
+                <div class="case-study-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">300%</div>
+                        <div class="stat-label">Engagement Growth</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">1.2M</div>
+                        <div class="stat-label">New Followers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">6</div>
+                        <div class="stat-label">Months</div>
+                    </div>
+                </div>
+            </div>
+            <div class="case-study-visual">
+                <!-- Would typically be an animated chart or diagram -->
+                <i class="fas fa-chart-line" style="font-size: 4rem; color: var(--secondary); opacity: 0.5;"></i>
+            </div>
+        </div>
+        
+        <div class="case-study">
+            <div class="case-study-content">
+                <h3>Conversion-First UI</h3>
+                <p>Redesigned Client Y's onboarding flow using behavioral psychology principles, reducing drop-off rate by 65% and increasing conversions by 220%.</p>
+                
+                <div class="case-study-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">65%</div>
+                        <div class="stat-label">Drop-off Reduction</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">220%</div>
+                        <div class="stat-label">Conversion Increase</div>
+                    </div>
+                </div>
+            </div>
+            <div class="case-study-visual">
+                <!-- Would typically be a UI mockup -->
+                <i class="fas fa-mobile-screen" style="font-size: 4rem; color: var(--secondary); opacity: 0.5;"></i>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Systems Section -->
+    <section id="systems">
+        <h2 class="section-title">Scalable Backend Systems</h2>
+        
+        <div class="case-study">
+            <div class="case-study-content">
+                <h3>High-Performance API</h3>
+                <p>Built a distributed API architecture that handles 15,000 requests per second with 99.99% uptime, reducing latency from 1200ms to 180ms.</p>
+                
+                <div class="case-study-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">15K</div>
+                        <div class="stat-label">RPS Capacity</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">99.99%</div>
+                        <div class="stat-label">Uptime</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">85%</div>
+                        <div class="stat-label">Latency Reduction</div>
+                    </div>
+                </div>
+            </div>
+            <div class="case-study-visual">
+                <!-- Would typically be a system diagram -->
+                <i class="fas fa-server" style="font-size: 4rem; color: var(--secondary); opacity: 0.5;"></i>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+        <h2 class="section-title">Credibility</h2>
+        
+        <div class="testimonials-container">
+            <!-- Testimonial 1 -->
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    Beverly shipped in 3 weeks what took our team 6 months. Their code is so clean we've adopted it as our internal standard.
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">JD</div>
+                    <div class="author-info">
+                        <h4>John Doe</h4>
+                        <p>CTO, TechStart Inc.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonial 2 -->
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    The only developer who thinks like a CEO. Beverly understands business impact as much as technical implementation.
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">AS</div>
+                    <div class="author-info">
+                        <h4>Amanda Smith</h4>
+                        <p>Founder, GrowthHack</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonial 3 -->
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    We've worked with many developers, but Beverly's systems are the only ones that scale effortlessly as we grow.
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MR</div>
+                    <div class="author-info">
+                        <h4>Miguel Rodriguez</h4>
+                        <p>Director of Engineering, ScaleUp</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 2030 Vision Section -->
+    <section id="future">
+        <h2 class="section-title">What I'm Building for 2030</h2>
+        
+        <div class="future-roadmap">
+            <!-- Roadmap Item 1 -->
+            <div class="roadmap-item">
+                <div class="roadmap-year">2026</div>
+                <h3 class="roadmap-title">Quantum-Compute API</h3>
+                <p>Making quantum computing accessible through a simple REST API interface for solving optimization problems 1000x faster than classical computers.</p>
+            </div>
+            
+            <!-- Roadmap Item 2 -->
+            <div class="roadmap-item">
+                <div class="roadmap-year">2028</div>
+                <h3 class="roadmap-title">Decentralized Social OS</h3>
+                <p>An open protocol for social networking where users own their data and algorithms are transparently auditable.</p>
+            </div>
+            
+            <!-- Roadmap Item 3 -->
+            <div class="roadmap-item">
+                <div class="roadmap-year">2030</div>
+                <h3 class="roadmap-title">AI-First Venture Studio</h3>
+                <p>Launching 10 startups per year where AI co-founders handle 80% of operational tasks, allowing human founders to focus on vision.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Let's Build the Future</h2>
+        <div style="text-align: center; max-width: 600px; margin: 0 auto;">
+            <p style="margin-bottom: 2rem;">Ready to collaborate on something extraordinary? I'm currently taking on select projects for 2025-2026.</p>
+            <a href="contact form.html" class="btn btn-primary" style="display: inline-block;">Get in Touch</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">Beverly 2030</div>
+        <div class="footer-links">
+            <a href="#ai-demos">Work</a>
+            <a href="#future">Vision</a>
+            <a href="contact form.html">Contact</a>
+            <a href="#">Blog</a>
+            <a href="#">Press</a>
+        </div>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-medium"></i></a>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Beverly 2030. Building the future, today.
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Particles.js config
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#6e00ff"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": false,
+                        "anim": {
+                            "enable": false,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": false,
+                            "speed": 40,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#6e00ff",
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": false,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": false,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+            
+            // Mobile menu toggle
+            const menuBtn = document.querySelector('.menu-btn');
+            const navUl = document.querySelector('nav ul');
+            
+            menuBtn.addEventListener('click', () => {
+                navUl.style.display = navUl.style.display === 'flex' ? 'none' : 'flex';
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        if (window.innerWidth <= 768) {
+                            navUl.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
